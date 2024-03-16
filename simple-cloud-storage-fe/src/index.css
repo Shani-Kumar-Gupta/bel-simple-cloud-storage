@@ -25,7 +25,6 @@ a:hover {
 body {
   margin: 0;
   display: flex;
-  place-items: center;
   min-width: 320px;
   min-height: 100vh;
 }
@@ -65,4 +64,21 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+/* .mainHeader {
+  display: inline-block;
+} */
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.mainHeading {
+  font-size: 2.5rem;
+  font-weight: bold;
 }
