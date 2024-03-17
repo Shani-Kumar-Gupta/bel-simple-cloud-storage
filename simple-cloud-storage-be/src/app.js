@@ -8,6 +8,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const cors = require('cors');
 const httpStatus = require('http-status');
+const { userAuthRoutes, bucketRoutes, uploadRoutes } = require('./routers');
 
 // Initializing our application with express
 const app = express();
@@ -32,13 +33,22 @@ app.options('*', cors());
 
 /************************ Routes Start *****************************/
 // Routes
-app.get('/', (req, res, next) => {
+routes.get('/', (req, res, next) => {
   res.status(200).send('Welcome to Simple Could Storage');
 });
 
+/* Auth Routes */
+routes.use('/simple-cloud-storage/v1/userAuth', userAuthRoutes);
+
+/* Bucket Routes */
+routes.use('/simple-cloud-storage/v1/bucket', bucketRoutes);
+
+/* upload Routes */
+routes.use('/simple-cloud-storage/v1/upload', uploadRoutes);
+
 // send back 404 response if endpoint not found
 // app.use((req, res, next) => {
-  
+
 // });
 
 /************************ Routes End *****************************/
