@@ -1,5 +1,5 @@
+const { nanoid } = require('nanoid');
 const mongoose = require('mongoose');
-const nanoid = require('nanoid');
 
 const { Schema } = mongoose;
 const userSchema = new Schema(
@@ -17,7 +17,7 @@ const userSchema = new Schema(
     email: {
       type: String,
       required: [true, 'Email is required'],
-      unique: true,
+      unique: [true, 'Duplicate email id'],
       trim: true,
       lowercase: true,
     },

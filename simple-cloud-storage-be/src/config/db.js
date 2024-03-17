@@ -10,14 +10,18 @@ const userPassword = encodeURIComponent(MONGODB_USER_PASSWORD);
 
 const dbConnect = () => {
   return mongoose
-    .createConnection(
-      `mongodb+srv://${userName}:${userPassword}@simple-cloud-storage.g5egxrh.mongodb.net/?retryWrites=true&w=majority&appName=simple-cloud-storage`
+    .connect(
+      `mongodb+srv://${userName}:${userPassword}@simple-cloud-storage.g5egxrh.mongodb.net/?retryWrites=true&w=majority&appName=simple-cloud-storage`,
+      {
+        useNewUrlParser: true,
+        useUnifiedTopology: true,
+      }
     )
-    .on('open', () => {
-      console.log(`Mongodb Connected`);
+    .then(() => {
+      console.log('Mongodb Connected!');
     })
-    .on('error', (err) => {
-      console.log(`Mongodb Error ${err}`);
+    .catch((err) => {
+      console.log(err);
     });
 };
 
