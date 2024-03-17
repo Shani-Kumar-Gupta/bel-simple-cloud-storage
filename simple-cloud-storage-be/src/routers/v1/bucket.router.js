@@ -1,8 +1,9 @@
 const express = require('express');
+const { bucketController } = require('../../controllers');
 const bucket = express.Router();
 
-bucket.post('/createBucket', (req, res, next) => {});
+bucket.post('/createBucket', bucketController.createBucketController);
 
-bucket.get('/fetchBucketList', (req, res, next) => {});
+bucket.get('/fetchBucketList', bucketController.fetchBucketListController);
 
 module.exports = bucket;
