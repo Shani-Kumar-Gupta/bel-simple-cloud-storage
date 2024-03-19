@@ -5,7 +5,6 @@ const UserSchema = require('../models/user.model');
 
 const registerUserAuthController = async (req, res, next) => {
   const body = req.body;
-  console.log('registerUserAuthController', body, req);
   const validateUserSchema =
     uservalidator.userAuthValidationSchema.validate(body);
   const { value, error } = validateUserSchema;

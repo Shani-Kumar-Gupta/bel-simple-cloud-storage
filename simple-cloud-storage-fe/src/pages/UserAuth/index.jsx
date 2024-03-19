@@ -1,6 +1,8 @@
 const UserAuth = () => {
   return (
-    <div className="user__auth">index</div>
+    <div className="user__auth">
+      
+    </div>
   )
 }
 

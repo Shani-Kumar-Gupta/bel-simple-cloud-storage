@@ -1,9 +1,9 @@
 const authController = require('./userAuth.controller');
 const bucketController = require('./bucket.controller');
-const uploadController = require('./upload.controller');
+const fileController = require('./file.controller');
 
 module.exports = {
   authController,
   bucketController,
-  uploadController
+  fileController
 }

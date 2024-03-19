@@ -7,7 +7,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const cors = require('cors');
 const httpStatus = require('http-status');
-const { userAuthRoutes, bucketRoutes, uploadRoutes } = require('./routers');
+const { userAuthRoutes, bucketRoutes, fileRoutes } = require('./routers');
 
 // Initializing our application with express
 const app = express();
@@ -44,7 +44,7 @@ routes.use('/simple-cloud-storage/v1/userAuth', userAuthRoutes);
 routes.use('/simple-cloud-storage/v1/bucket', bucketRoutes);
 
 /* upload Routes */
-routes.use('/simple-cloud-storage/v1/upload', uploadRoutes);
+routes.use('/simple-cloud-storage/v1/file', fileRoutes);
 
 // send back 404 response if endpoint not found
 // app.use((req, res, next) => {

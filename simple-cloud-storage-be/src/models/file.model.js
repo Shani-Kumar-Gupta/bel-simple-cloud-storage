@@ -4,7 +4,7 @@ const bucketModel = require('./bucket.model');
 
 const { Schema } = mongoose;
 
-const uploadSchema = new Schema(
+const fileSchema = new Schema(
   {
     userId: {
       type: Schema.Types.ObjectId,
@@ -59,6 +59,6 @@ const uploadSchema = new Schema(
   }
 );
 
-const uploadModel = mongoose.model('upload', uploadSchema);
+const fileModel = mongoose.model('file', fileSchema);
 
-module.exports = uploadModel;
+module.exports = fileModel;
