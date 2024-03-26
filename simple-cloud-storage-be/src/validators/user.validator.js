@@ -19,8 +19,24 @@ const userAuthValidationSchema = Joi.object().keys({
   }),
 });
 
+
+const userLoginValidationSchema = Joi.object().keys({
+  email: Joi.string().email().required().messages({
+    'string.email': 'Please enter a valid email address!',
+    'string.empty': 'Email is required!',
+    'any.required': 'Email is required'
+  }),
+  password: Joi.string().min(6).max(10).required().messages({
+    'string.empty': "Password is required",
+    'string.min': "Password must be at least 6 characters",
+    'string.max': "Password must be at most 10 characters",
+    'any.required': 'Password is required'
+  }),
+});
+
 // const userAuthValidationSchema = '';
 
 module.exports = {
-  userAuthValidationSchema
+  userAuthValidationSchema,
+  userLoginValidationSchema
 }
