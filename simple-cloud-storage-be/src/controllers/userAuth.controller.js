@@ -75,7 +75,41 @@ const loginUserAuthController = async (req, res, next) => {
   }
 };
 
+const fetchAllUserList = async (req, res, next) => {
+  if (req.userId) {
+    let userList = [];
+    const usersData = await UserSchema.find();
+    if (usersData && usersData.length > 0) {
+      usersData.forEach((user) => {
+        let obj = {
+          name: user.name,
+          email: user.email,
+          userId: user.userId,
+        };
+        userList.push(obj);
+      });
+      return res.status(200).json({
+        statusCode: 200,
+        message: 'Users list was successfully fetched',
+        usersList: userList,
+      });
+    } else {
+      return res.status(404).json({
+        statusCode: 404,
+        message: 'Users list not found! Please try again!',
+        usersList: [],
+      });
+    }
+  } else {
+    return res.status(403).json({
+      statusCode: 403,
+      message: req.message,
+    });
+  }
+};
+
 module.exports = {
   registerUserAuthController,
   loginUserAuthController,
+  fetchAllUserList,
 };
