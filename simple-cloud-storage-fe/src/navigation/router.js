@@ -5,6 +5,7 @@ import UserAuth from '../pages/UserAuth/index.jsx';
 import Dashboard from '../pages/Dashboard/index.jsx';
 import BucketFile from '../pages/BucketFile/index.jsx';
 import ROUTES from './constants.js';
+import CreateBucket from '../pages/CreateBucket/index.jsx';
 
 const router = createBrowserRouter([
   {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
       {
         path: ROUTES.DASHBOARD,
         element: <Dashboard />,
+      },
+      {
+        path: ROUTES.CREATEBUCKET,
+        element: <CreateBucket />
       },
       {
         path: ROUTES.BUCKETFILES,

@@ -6,7 +6,7 @@
   font-style: normal;
   line-height: 1.5;
 
-  color-scheme: dark;
+  /* color-scheme: dark; */
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
 
@@ -55,7 +55,7 @@ button {
   cursor: pointer;
 }
 
-@media (prefers-color-scheme: light) {
+/* @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
     background-color: #ffffff;
@@ -66,7 +66,7 @@ button {
   button {
     background-color: #f9f9f9;
   }
-}
+} */
 
 /* .mainHeader {
   display: inline-block;
