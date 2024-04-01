@@ -5,6 +5,7 @@ import Signup from './Signup';
 
 const UserAuth = () => {
   const [login, setLogin] = useState(true);
+  
   return (
     <div className="user__auth">
       <section className="leftSection">

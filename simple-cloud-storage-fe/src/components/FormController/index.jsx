@@ -11,6 +11,7 @@ const FormController = ({
   control,
   defaultvalue,
   widget,
+  inputType,
   ...elementProps
 }) => {
   const renderComponent = (
@@ -32,6 +33,7 @@ const FormController = ({
             onBlur={onBlur}
             onChange={onChange}
             defaultInputVal={value}
+            inputType={inputType}
             ref={ref}
             {...elementProps}
           />

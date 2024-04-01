@@ -22,7 +22,7 @@ const persistConfig = {
 const rootReducer = persistReducer(persistConfig, userSCSSlice);
 
 const store = configureStore({
-  reducer: { user: rootReducer },
+  reducer: { simpleCloudStorage: rootReducer },
   // middleware: (getDefaultMiddleware) => {
   //   getDefaultMiddleware({
   //     serializableCheck: {
