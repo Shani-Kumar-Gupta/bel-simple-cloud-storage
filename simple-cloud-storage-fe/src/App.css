@@ -143,3 +143,9 @@
   color: darkorange;
   cursor: pointer;
 }
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
