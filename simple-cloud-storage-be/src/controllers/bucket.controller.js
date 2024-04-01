@@ -33,7 +33,39 @@ const createBucketController = async (req, res, next) => {
   }
 };
 
-const fetchBucketListController = (req, res, next) => {};
+const fetchBucketListController = async (req, res, next) => {
+  if (req.userId) {
+    let bucketList = [];
+    const bucketData = await BucketSchema.find();
+    if (bucketData && bucketData.length > 0) {
+      bucketData.forEach((bucket) => {
+        let obj = {
+          id: bucket.bucketId,
+          bucketName: bucket.bucketName,
+          bucketSize: bucket.bucketSize,
+          tags: bucket.tags,
+        };
+        userList.push(obj);
+      });
+      return res.status(200).json({
+        statusCode: 200,
+        message: 'Users list was successfully fetched',
+        bucketsList: bucketList,
+      });
+    } else {
+      return res.status(404).json({
+        statusCode: 404,
+        message: 'Users list not found! Please try again!',
+        usersList: [],
+      });
+    }
+  } else {
+    return res.status(403).json({
+      statusCode: 403,
+      message: req.message,
+    });
+  }
+};
 
 module.exports = {
   createBucketController,
