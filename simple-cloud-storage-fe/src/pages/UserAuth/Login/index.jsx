@@ -40,7 +40,6 @@ const Login = () => {
     } else {
       showErrorToastMessage(resData?.response?.data?.message);
     }
-    console.log("؋Shani",resData);
   };
   return <div className='loginForm__container'>
     <form onSubmit={handleSubmit(onSubmit)}>

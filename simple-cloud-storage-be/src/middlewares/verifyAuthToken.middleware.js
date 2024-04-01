@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const { JWT_SECRET_KEY } = require('../config/env.config');
 
 const verifyAuthToken = (req, res, next) => {
-  let authToken = req.headers.authtoken;
+  let authToken = req.headers.Authorization;
   if (req.headers && authToken) {
     jwt.verify(authToken, JWT_SECRET_KEY, function (err, decode) {
       if (err) {

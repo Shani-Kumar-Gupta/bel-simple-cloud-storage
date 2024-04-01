@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 const userModel = require('./user.model');
-const nanoid = require('nanoid');
+const { nanoid } = require('nanoid');
 const { Schema } = mongoose;
 
 const bucketSchema = new Schema({
@@ -8,12 +8,12 @@ const bucketSchema = new Schema({
   //   type: Schema.Types.ObjectId,
   //   ref: userModel.modelName,
   // },
-  userId: [{
+  userId: {
     type: String,
     ref: userModel.modelName,
     required: [true, 'User id is required'],
     unique: [true, 'User id should be unique']
-  }],
+  },
   bucketId: {
     type: String,
     default: () => 'BUCKET700' + nanoid(7),
