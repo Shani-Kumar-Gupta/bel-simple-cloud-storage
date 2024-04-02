@@ -40,9 +40,9 @@ export const createBucket = async (body) => {
   }
 };
 
-export const fetchBucketList = async (userId) => {
+export const fetchBucketList = async () => {
   try {
-    const url = `bucket/fetchBucketList/${userId}`;
+    const url = `bucket/fetchBucketList`;
     let res = await axiosInstance.get(url);
     return res;
   } catch (error) {

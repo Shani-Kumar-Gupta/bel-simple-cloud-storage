@@ -21,16 +21,21 @@ const userSCSSlice = createSlice({
       state.state.isFetching = true;
     },
     setIsUserAuthenticated: (state, action) => {
-      state.userSCSData = { ...state.userSCSData, ...action.payload?.loginInfo?.data?.userData };
-      state.userSCSData.errorMessage = "";
+      state.userSCSData = {
+        ...state.userSCSData,
+        ...action.payload?.loginInfo?.data?.userData,
+      };
+      state.userSCSData.accessToken = action.payload?.loginInfo?.data
+        ?.accessToken
+        ? action.payload?.loginInfo?.data?.accessToken
+        : state.userSCSData.accessToken;
+      state.userSCSData.errorMessage = '';
       state.userSCSData.isAuthenticated = true;
-      state.userSCSData.accessToken = action.payload?.loginInfo?.data?.accessToken;
-      console.log("User is authenticated", action);
     },
     setErrorMessage: (state, action) => {
       state.userSCSData = { ...state.userSCSData };
       state.userSCSData.errorMessage = action.payload.errorMessage;
-    }
+    },
   },
 });
 

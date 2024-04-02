@@ -170,7 +170,7 @@ td, th {
   padding: 8px;
 }
 
-tr:first-child {
+thead {
   background-color: darkorange;
   color: #1a1a1a;
 }
