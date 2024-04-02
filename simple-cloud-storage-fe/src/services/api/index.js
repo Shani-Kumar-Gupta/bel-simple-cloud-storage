@@ -49,3 +49,13 @@ export const fetchBucketList = async () => {
     console.log(error);
   }
 };
+
+export const fetchBucketById = async (bucketId) => {
+  try {
+    const url = `bucket/fetchBucketById/${bucketId}`;
+    let res = await axiosInstance.get(url);
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};

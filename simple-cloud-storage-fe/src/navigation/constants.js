@@ -1,7 +1,7 @@
 const ROUTES = {
   "ROOT": "/",
   "DASHBOARD": "/dashboard",
-  "BUCKETFILES": "/bucketFiles/:id",
+  "BUCKETFILES": "/bucketFiles/:bucketId",
   "CREATEBUCKET": "/createBucket",
 }
 

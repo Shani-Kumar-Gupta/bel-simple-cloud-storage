@@ -77,7 +77,7 @@
   height: 100%;
 }
 
-.dashboard__container, .user__auth, .createBucket__container {
+.dashboard__container, .user__auth, .createBucket__container, .bucketFile__container {
   width: 100%;
   background-color: lightblue;
   padding: 1rem 1rem;
@@ -91,7 +91,7 @@
   position: relative;
 }
 
-.mainDashboardContainer {
+.mainDashboardContainer, .mainBucketContainer {
   display: flex;
   justify-content: space-between;
 }
@@ -148,7 +148,7 @@
   cursor: pointer;
 }
 
-.userInfo {
+.userInfo, .bucketInfo {
   display: flex;
   flex-direction: column;
   gap: 1rem;
