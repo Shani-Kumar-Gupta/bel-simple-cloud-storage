@@ -19,7 +19,7 @@ const UserAuth = () => {
       <section className="rightSection">
         <h2 className="welcomeText">Welcome</h2>
         <section className="userAuthForm">
-          {login ? <Login /> : <Signup />}
+          {login ? <Login /> : <Signup switchToLogin={() => setLogin((o) => !o)} />}
         </section>
         <p onClick={() => setLogin((o) => !o)} className="bottomText">
           {login ? 'Create an account' : 'Login to your account'}

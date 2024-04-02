@@ -43,6 +43,7 @@ const BucketFile = () => {
           <Button btnType={'button'}>Upload Files/Folder</Button>
         </section>
       </div>
+      <hr className="horizontalLize" />
     </div>
   );
 };

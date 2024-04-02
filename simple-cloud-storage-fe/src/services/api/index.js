@@ -14,6 +14,21 @@ export const userLogin = async (body) => {
   }
 };
 
+export const userSignup = async (body) => {
+  try {
+    const url = 'userAuth/signup';
+    let payload = {
+      name: body.fullName,
+      email: body.emailId,
+      password: body.password,
+    };
+    let res = await axiosInstance.post(url, payload);
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 export const fetchAllUsersList = async (userId) => {
   try {
     const url = `userAuth/fetchUsersList/${userId}`;
