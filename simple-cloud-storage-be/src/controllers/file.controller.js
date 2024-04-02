@@ -1,5 +1,6 @@
 const { fileValidator } = require('../validators');
 const UploadFileSchema = require('../models/file.model');
+const fs = require('node:fs');
 
 const fileUploadController = async (req, res, next) => {
   if (req.userId) {
@@ -130,7 +131,33 @@ const fetchUploadedFilesController = async (req, res, next) => {
   }
 };
 
-const downloadFileController = (req, res, next) => {};
+const downloadFileController = (req, res, next) => {
+  if (req.userId) {
+    try {
+      let body = req.body;
+      let folderName = body.bucketName;
+      let fileName = body.fileName;
+      let originalFileName = body.originalFileName;
+      const filePath = `simpleCloudStorage/${folderName}/${fileName}`;
+      res.setHeader(
+        'Content-Disposition',
+        `attachment; filename="${originalFileName}"`
+      );
+      const fileStream = fs.createReadStream(filePath);
+      fileStream.pipe(res);
+    } catch (error) {
+      return res.status(400).json({
+        statusCode: 400,
+        message: error.message,
+      });
+    }
+  } else {
+    return res.status(403).json({
+      statusCode: 403,
+      message: req.message,
+    });
+  }
+};
 
 module.exports = {
   fileUploadController,

@@ -17,7 +17,7 @@ file.get(
   fileController.fetchUploadedFilesController
 );
 
-file.post(
+file.get(
   '/download',
   verifyAuthTokenMiddleware,
   fileController.downloadFileController
