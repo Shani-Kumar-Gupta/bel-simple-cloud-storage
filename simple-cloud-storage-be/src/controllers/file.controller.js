@@ -101,7 +101,34 @@ const fileUploadController = async (req, res, next) => {
   }
 };
 
-const fetchUploadedFilesController = (req, res, next) => {};
+const fetchUploadedFilesController = async (req, res, next) => {
+  if (req.userId) {
+    try {
+      let body = req.body;
+      let payload = {
+        bucketName: req.body.bucketName,
+        userId: req.userId,
+        bucketId: req.body.bucketId,
+      };
+      const fetchUploadedFiles = await UploadFileSchema.find(payload);
+      return res.status(200).json({
+        statusCode: 200,
+        message: 'Uploaded files fetched successfully!',
+        uploadedFiles: fetchUploadedFiles,
+      });
+    } catch (error) {
+      return res.status(400).json({
+        statusCode: 400,
+        message: error.message,
+      });
+    }
+  } else {
+    return res.status(403).json({
+      statusCode: 403,
+      message: req.message,
+    });
+  }
+};
 
 const downloadFileController = (req, res, next) => {};
 
