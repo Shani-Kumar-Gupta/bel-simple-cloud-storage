@@ -25,6 +25,10 @@ const fileSchema = new Schema(
       type: String,
       required: [true, 'File name is required'],
     },
+    originalFileName: {
+      type: String,
+      required: [true, 'Original file name is required'],
+    },
     typeOfFile: {
       type: String,
       required: [true, 'File type is required'],
@@ -45,6 +49,9 @@ const fileSchema = new Schema(
     prevVersionsDetails: [
       {
         fileName: {
+          type: String,
+        },
+        originalFileName: {
           type: String,
         },
         typeOfFile: {
