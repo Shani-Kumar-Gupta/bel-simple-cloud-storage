@@ -15,4 +15,10 @@ bucket.get(
   bucketController.fetchBucketListController
 );
 
+bucket.get(
+  '/fetchBucketById/:bucketId',
+  verifyAuthTokenMiddleware,
+  bucketController.fetchBucketByIdController
+);
+
 module.exports = bucket;

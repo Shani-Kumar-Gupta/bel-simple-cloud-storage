@@ -67,7 +67,50 @@ const fetchBucketListController = async (req, res, next) => {
   }
 };
 
+const fetchBucketByIdController = async (req, res, next) => {
+  let bucketId = req.params.bucketId;
+  let userId = req.userId;
+  if (userId) {
+    if (bucketId) {
+      try {
+        let bucketDetails = await BucketSchema.find({
+          bucketId: { $eq: bucketId },
+        });
+        let result = {
+          id: bucketDetails[0].bucketId,
+          bucketName: bucketDetails[0].bucketName,
+          bucketSize: bucketDetails[0].bucketSize,
+          tags: bucketDetails[0].tags,
+          userId: bucketDetails[0].userId,
+        };
+        return res.status(200).json({
+          statusCode: 200,
+          message: 'Bucket details fetched successfully!',
+          bucketDetails: result,
+        });
+      } catch (error) {
+        return res.status(404).json({
+          statusCode: 404,
+          message: 'Bucket details not found! Please try again!',
+          bucketsList: [],
+        });
+      }
+    } else {
+      return res.status(404).json({
+        statusCode: 404,
+        message: 'Please provide bucket ID.',
+      });
+    }
+  } else {
+    return res.status(403).json({
+      statusCode: 403,
+      message: req.message,
+    });
+  }
+};
+
 module.exports = {
   createBucketController,
   fetchBucketListController,
+  fetchBucketByIdController,
 };
