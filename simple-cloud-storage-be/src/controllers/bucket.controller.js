@@ -1,5 +1,7 @@
 const { bucketValidator } = require('../validators');
 const BucketSchema = require('../models/bucket.model');
+const fs = require('node:fs');
+const path = require('node:path');
 
 const createBucketController = async (req, res, next) => {
   let body = req.body;
@@ -20,6 +22,19 @@ const createBucketController = async (req, res, next) => {
         tags: body.tags || [],
       };
       const createBucket = await BucketSchema.create(bucketDetails);
+      const folderName = body.bucketName;
+      const rootFolder = 'simpleCloudStorage';
+      const folderPath = `${rootFolder}/${folderName}`;
+      if (fs.existsSync(rootFolder)) {
+        if (!fs.existsSync(folderPath)) {
+          fs.mkdirSync(folderPath);
+        }
+      } else {
+        fs.mkdirSync(rootFolder);
+        if (!fs.existsSync(folderPath)) {
+          fs.mkdirSync(folderPath);
+        }
+      }
       return res.status(200).json({
         statusCode: 200,
         message: 'Bucket created successfully!',

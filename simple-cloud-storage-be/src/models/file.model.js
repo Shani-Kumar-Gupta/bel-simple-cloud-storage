@@ -7,12 +7,19 @@ const { Schema } = mongoose;
 const fileSchema = new Schema(
   {
     userId: {
-      type: Schema.Types.ObjectId,
+      type: String,
       ref: userModel.modelName,
+      required: [true, 'User id is required'],
     },
     bucketId: {
-      type: Schema.Types.ObjectId,
+      type: String,
       ref: bucketModel.modelName,
+      required: [true, 'Bucket id is required'],
+    },
+    bucketName: {
+      type: String,
+      ref: bucketModel.modelName,
+      required: [true, 'Bucket name is required'],
     },
     fileName: {
       type: String,
@@ -28,6 +35,7 @@ const fileSchema = new Schema(
     },
     fileVersion: {
       type: Number,
+      default: 0
     },
     tags: [
       {
@@ -38,15 +46,12 @@ const fileSchema = new Schema(
       {
         fileName: {
           type: String,
-          required: true,
         },
         typeOfFile: {
           type: String,
-          required: true,
         },
         filePath: {
           type: String,
-          required: true,
         },
         fileVersion: {
           type: Number,

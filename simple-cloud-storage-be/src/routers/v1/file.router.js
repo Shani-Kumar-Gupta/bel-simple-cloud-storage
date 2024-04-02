@@ -1,11 +1,26 @@
 const express = require('express');
 const { fileController } = require('../../controllers');
 const file = express.Router();
+const { verifyAuthTokenMiddleware } = require('../../middlewares');
+const { upload } = require('../../middlewares/multer.middleware');
 
-file.post('/uploadFiles', fileController.fileUploadController);
+file.post(
+  '/uploadFiles',
+  verifyAuthTokenMiddleware,
+  upload().single('myFile'),
+  fileController.fileUploadController
+);
 
-file.get('/fetchUploadedFiles', fileController.fetchUploadedFilesController);
+file.get(
+  '/fetchUploadedFiles',
+  verifyAuthTokenMiddleware,
+  fileController.fetchUploadedFilesController
+);
 
-file.post('/download', fileController.downloadFileController);
+file.post(
+  '/download',
+  verifyAuthTokenMiddleware,
+  fileController.downloadFileController
+);
 
 module.exports = file;
