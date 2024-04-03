@@ -74,3 +74,33 @@ export const fetchBucketById = async (bucketId) => {
     console.log(error);
   }
 };
+
+export const fetchUploadedFiles = async (body) => {
+  try {
+    let url = `file/fetchUploadedFiles?bucketName=${body.bucketName}&bucketId=${body.bucketId}`;
+    const res = await axiosInstance.get(url);
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const downloadUploadedFiles = async (body, typeOfFile) => {
+  try {
+    let url = `file/download?bucketName=${body.bucketName}&bucketId=${body.bucketId}&fileName=${body.fileName}&originalFileName=${body.originalFileName}&contentType=${body.typeOfFile}`;
+    let res = await axiosInstance.get(url);
+    console.log("Download", res?.data, typeOfFile);
+    const blob = new Blob([res?.data], { type: typeOfFile });
+    const blobUrl = window.URL.createObjectURL(blob);
+    const fileName = body.originalFileName;
+    let link = document.createElement('a');
+    console.log("blobbbb", blobUrl);
+    link.href = blobUrl;
+    link.download = fileName; 
+    link.click();
+    // window.URL.revokeObjectURL(url);
+    return res;
+  } catch (error) {
+    console.log(error);
+  }
+};

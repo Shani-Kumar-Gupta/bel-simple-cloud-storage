@@ -178,3 +178,36 @@ thead {
 tr:nth-child(even) {
   background-color: #5756568f;
 }
+
+.fileDetails__Container {
+  width: 100%;
+  background-color: #ffffff;
+  color: #1a1a1a;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+.mainDetails {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+label {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: darkorange;
+}
+
+.previousVersionDetails {
+  margin-top: 1rem;
+}
+
+p {
+  font-size: 0.9rem;
+}
+
+a {
+  cursor: pointer;
+}

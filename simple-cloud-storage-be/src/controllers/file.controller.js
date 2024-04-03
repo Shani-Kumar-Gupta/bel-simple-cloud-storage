@@ -105,11 +105,11 @@ const fileUploadController = async (req, res, next) => {
 const fetchUploadedFilesController = async (req, res, next) => {
   if (req.userId) {
     try {
-      let body = req.body;
+      let body = req.query;
       let payload = {
-        bucketName: req.body.bucketName,
+        bucketName: body.bucketName,
         userId: req.userId,
-        bucketId: req.body.bucketId,
+        bucketId: body.bucketId,
       };
       const fetchUploadedFiles = await UploadFileSchema.find(payload);
       return res.status(200).json({
@@ -134,17 +134,20 @@ const fetchUploadedFilesController = async (req, res, next) => {
 const downloadFileController = (req, res, next) => {
   if (req.userId) {
     try {
-      let body = req.body;
+      let body = req.query;
       let folderName = body.bucketName;
       let fileName = body.fileName;
       let originalFileName = body.originalFileName;
+      let contentType = body.contentType;
       const filePath = `simpleCloudStorage/${folderName}/${fileName}`;
       res.setHeader(
         'Content-Disposition',
         `attachment; filename="${originalFileName}"`
       );
+      res.setHeader('Content-Type', contentType);
       const fileStream = fs.createReadStream(filePath);
       fileStream.pipe(res);
+      return fileStream;
     } catch (error) {
       return res.status(400).json({
         statusCode: 400,
