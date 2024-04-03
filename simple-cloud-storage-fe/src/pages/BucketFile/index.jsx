@@ -1,15 +1,41 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useMemo, useState } from 'react';
 import Button from '../../components/Button';
 import { useParams } from 'react-router-dom';
-import { fetchBucketById, fetchUploadedFiles } from '../../services/api';
+import {
+  fetchBucketById,
+  fetchUploadedFiles,
+  uploadBucketFiles,
+} from '../../services/api';
 import { showErrorToastMessage, showSuccessToastMessage } from '../../helper';
 import FileDetails from '../../components/FileDetails';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+import { useForm } from 'react-hook-form';
+import FormController from '../../components/FormController';
+
+const fileSchema = yup.object().shape({
+  tags: yup.string(),
+});
 
 const BucketFile = () => {
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    getValues,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(fileSchema),
+    defaultValues: {
+      tags: '',
+    },
+  });
   const { bucketId } = useParams();
   const [bucketDetails, setBucketDetails] = useState({});
   const [uploadedFiles, setUploadedFiles] = useState({});
+  const [file, setFile] = useState();
 
   const fetchBucketUploadedFiles = async (bucketId) => {
     try {
@@ -27,7 +53,6 @@ const BucketFile = () => {
     } catch (error) {
       console.log(error);
     }
-    console.log('Uploaded files', uploadedFiles);
   };
 
   const fetchBucketDataById = async (bucketId) => {
@@ -56,6 +81,41 @@ const BucketFile = () => {
     }
   }, [bucketId, bucketDetails]);
 
+  const onSubmit = async (event) => {
+    event.preventDefault();
+    if (file?.name) {
+      const formData = new FormData();
+      formData.append('myFile', file);
+      let tags = getValues('tags') ? getValues('tags')?.split(',') : [];
+      let body = {
+        bucketId: bucketId,
+        bucketName: bucketDetails?.bucketName,
+        tags: tags,
+      };
+      try {
+        const fileRes = await uploadBucketFiles(body, formData);
+        if (fileRes && fileRes?.data?.statusCode == 200) {
+          setBucketDetails(fileRes?.data?.bucketDetails);
+          showSuccessToastMessage('File Uploaded Successfully!');
+          await fetchBucketDataById(bucketId);
+          await fetchBucketUploadedFiles(bucketId);
+          event.target.value = '';
+          setValue('tags', '');
+        } else {
+          showErrorToastMessage(fileRes?.response?.data?.message);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      showErrorToastMessage('Please select file to upload!');
+    }
+  };
+
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
   return (
     <div className="bucketFile__container">
       <div className="mainBucketContainer">
@@ -70,7 +130,25 @@ const BucketFile = () => {
           <h4>
             Welcome! Upload your files inside your bucket without any hustles 😎
           </h4>
-          <Button btnType={'button'}>Upload Files/Folder</Button>
+          <form>
+            <input
+              type="file"
+              onChange={handleFileChange}
+              style={{ marginBottom: '1rem' }}
+            />
+            <FormController
+              control={control}
+              widget={'INPUT'}
+              name={'tags'}
+              inputPlaceholder={'Enter Tags'}
+              inputLabel={'Enter Tags'}
+              inputId={'tags'}
+              inputType="text"
+            />
+            <Button btnType={'submit'} clickHandler={onSubmit}>
+              Upload Files/Folder
+            </Button>
+          </form>
         </section>
       </div>
       <hr className="horizontalLize" />

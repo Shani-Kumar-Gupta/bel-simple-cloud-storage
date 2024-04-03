@@ -17,6 +17,10 @@ const validateFileUploadSchema = Joi.object().keys({
     'string.empty': 'File name is required',
     'any.required': 'File name is required',
   }),
+  originalFileName: Joi.string().required().messages({
+    'string.empty': 'Original File name is required',
+    'any.required': 'Original File name is required',
+  }),
   typeOfFile: Joi.string().required().messages({
     'string.empty': 'File type is required',
     'any.required': 'File type is required',

@@ -26,7 +26,7 @@ const Input = forwardRef(function Input({
       <input
         type={inputType}
         placeholder={inputPlaceholder}
-        value={defaultInputVal}
+        value={defaultInputVal || ''}
         id={inputId}
         className={`inputField ${inputClassName}`}
         onBlur={onBlur}

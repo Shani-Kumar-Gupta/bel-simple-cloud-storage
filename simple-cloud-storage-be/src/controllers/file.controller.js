@@ -4,13 +4,17 @@ const fs = require('node:fs');
 
 const fileUploadController = async (req, res, next) => {
   if (req.userId) {
-    if (req.file) {
+    if (req.file && req.file.filename) {
+      let params = req.query;
       let body = {
-        ...req.body,
-        fileName: req.file.originalname,
+        fileName: req.file.filename,
+        originalFileName: req.file.originalname,
         typeOfFile: req.file.mimetype,
         filePath: req.file.path,
-        tags: [],
+        userId: req.userId,
+        bucketName: params.bucketName,
+        bucketId: params.bucketId,
+        tags: params?.tags || [],
       };
       let validateUploadFileSchema =
         fileValidator.validateFileUploadSchema.validate(body);
@@ -93,6 +97,11 @@ const fileUploadController = async (req, res, next) => {
         statusCode: 200,
         message: 'File uploaded successfully!',
       });
+    } else {
+      return res.status(400).json({
+        statusCode: 400,
+        message: 'Please attach a file to upload!',
+      });
     }
   } else {
     return res.status(403).json({
@@ -140,14 +149,20 @@ const downloadFileController = (req, res, next) => {
       let originalFileName = body.originalFileName;
       let contentType = body.contentType;
       const filePath = `simpleCloudStorage/${folderName}/${fileName}`;
-      res.setHeader(
-        'Content-Disposition',
-        `attachment; filename="${originalFileName}"`
-      );
-      res.setHeader('Content-Type', contentType);
-      const fileStream = fs.createReadStream(filePath);
-      fileStream.pipe(res);
-      return fileStream;
+      // res.setHeader(
+      //   'Content-Disposition',
+      //   `attachment; filename="${originalFileName}"`
+      // );
+      // res.setHeader('Content-Type', contentType);
+      const fileStream = fs.readFileSync(filePath, 'base64');
+      // const decodedString = new Buffer.from(fileStream, 'base64');
+      // console.log("lelo mera file stream", decodedString)
+      // const finalFile = fileStream.pipe(res);
+      return res.status(200).json({
+        statusCode: 200,
+        message: 'Sucessfully download',
+        data: fileStream,
+      });
     } catch (error) {
       return res.status(400).json({
         statusCode: 400,

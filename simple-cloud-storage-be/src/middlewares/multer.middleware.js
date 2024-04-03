@@ -6,7 +6,6 @@ exports.upload = () => {
   return (fileUpload = multer({
     storage: multer.diskStorage({
       destination: function (req, file, cb) {
-        console.log("uploading", req.query);
         const folderName = req.query.bucketName;
         const path = `simpleCloudStorage/${folderName}`;
         fs.mkdirSync(path, { recursive: true });
