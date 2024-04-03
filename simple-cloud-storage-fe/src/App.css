@@ -200,6 +200,15 @@ label {
   /* color: darkorange; */
 }
 
+.uploadFileLabel {
+  /* color: #FA7070; */
+  /* color: #2C7865; */
+  /* color: #007F73; */
+  /* color: #1B1A55; */
+  /* color: #F2613F; */
+  color: #FB6D48;
+}
+
 .previousVersionDetails {
   margin-top: 1rem;
 }

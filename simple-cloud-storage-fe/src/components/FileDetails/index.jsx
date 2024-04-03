@@ -33,7 +33,7 @@ const FileDetails = ({
     <div className="fileDetails__Container">
       <section className="mainDetails">
         <div>
-          <label>File Name</label>
+          <label className='uploadFileLabel'>File Name</label>
           <p>
             <a onClick={() => downloadFile(fileName, originalFileName, typeOfFile)}>
               {fileName}
@@ -41,23 +41,23 @@ const FileDetails = ({
           </p>
         </div>
         <div>
-          <label>Original File Name</label>
+          <label className='uploadFileLabel'>Original File Name</label>
           <p>{originalFileName}</p>
         </div>
         <div>
-          <label>File Version</label>
+          <label className='uploadFileLabel'>File Version</label>
           <p>{fileVersion}</p>
         </div>
         <div>
-          <label>File Path</label>
+          <label className='uploadFileLabel'>File Path</label>
           <p>{filePath}</p>
         </div>
         <div>
-          <label>Type of File</label>
+          <label className='uploadFileLabel'>Type of File</label>
           <p>{typeOfFile}</p>
         </div>
         <div>
-          <label>Tags</label>
+          <label className='uploadFileLabel'>Tags</label>
           <p>{tags.length ? tags.toString() : '-'}</p>
         </div>
       </section>
@@ -73,27 +73,27 @@ const FileDetails = ({
                 style={{ marginBottom: '1rem' }}
               >
                 <div>
-                  <label>File Name</label>
+                  <label className='uploadFileLabel'>File Name</label>
                   <p><a onClick={() => downloadFile(prevDetails.fileName, prevDetails.originalFileName, prevDetails.typeOfFile)}>{prevDetails.fileName}</a></p>
                 </div>
                 <div>
-                  <label>Original File Name</label>
+                  <label className='uploadFileLabel'>Original File Name</label>
                   <p>{prevDetails.originalFileName}</p>
                 </div>
                 <div>
-                  <label>File Version</label>
+                  <label className='uploadFileLabel'>File Version</label>
                   <p>{prevDetails.fileVersion}</p>
                 </div>
                 <div>
-                  <label>File Path</label>
+                  <label className='uploadFileLabel'>File Path</label>
                   <p>{prevDetails.filePath}</p>
                 </div>
                 <div>
-                  <label>Type of File</label>
+                  <label className='uploadFileLabel'>Type of File</label>
                   <p>{prevDetails.typeOfFile}</p>
                 </div>
                 <div>
-                  <label>Tags</label>
+                  <label className='uploadFileLabel'>Tags</label>
                   <p>{tags.length ? tags.toString() : '-'}</p>
                 </div>
               </section>
