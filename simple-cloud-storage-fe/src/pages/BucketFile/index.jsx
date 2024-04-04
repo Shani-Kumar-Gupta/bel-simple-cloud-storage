@@ -87,10 +87,11 @@ const BucketFile = () => {
       const formData = new FormData();
       formData.append('myFile', file);
       let tags = getValues('tags') ? getValues('tags')?.split(',') : [];
+      console.log("Upload", tags);
       let body = {
         bucketId: bucketId,
         bucketName: bucketDetails?.bucketName,
-        tags: tags,
+        tags: tags || [],
       };
       try {
         const fileRes = await uploadBucketFiles(body, formData);

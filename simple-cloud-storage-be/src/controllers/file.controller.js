@@ -14,7 +14,7 @@ const fileUploadController = async (req, res, next) => {
         userId: req.userId,
         bucketName: params.bucketName,
         bucketId: params.bucketId,
-        tags: params?.tags || [],
+        tags: params?.tags ? params?.tags?.split(',') : [],
       };
       let validateUploadFileSchema =
         fileValidator.validateFileUploadSchema.validate(body);
