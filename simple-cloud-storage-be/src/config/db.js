@@ -8,8 +8,11 @@ const {
 const userName = encodeURIComponent(MONGODB_USER_NAME);
 const userPassword = encodeURIComponent(MONGODB_USER_PASSWORD);
 
-const dbConnect = () => {
-  return mongoose
+let conn = null
+
+const dbConnect = async () => {
+  if (conn === null) {
+    conn = await mongoose
     .connect(
       `mongodb+srv://${userName}:${userPassword}@simple-cloud-storage.g5egxrh.mongodb.net/?retryWrites=true&w=majority&appName=simple-cloud-storage`,
       {
@@ -23,6 +26,8 @@ const dbConnect = () => {
     .catch((err) => {
       console.log(err);
     });
+  }
+  return conn;
 };
 
 module.exports = dbConnect;

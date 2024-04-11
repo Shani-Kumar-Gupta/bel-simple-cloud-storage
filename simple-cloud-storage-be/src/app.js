@@ -29,6 +29,10 @@ app.use(cors());
 app.options('*', cors());
 app.use(routes);
 
+(async () => {
+  await dbConnect()
+})()
+
 /************************ Middlewares Ends *****************************/
 
 /************************ Routes Start *****************************/
@@ -58,7 +62,7 @@ const PORT = PORT_NUMBER || 8080;
 app.listen(PORT, (err) => {
   if (!err) {
     console.log(`Server listening on PORT ${PORT}`);
-    dbConnect();
+    // dbConnect();
   } else {
     console.log(`Some error encountered to run the server ${err}`);
   }
